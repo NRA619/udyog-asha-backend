@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "ng build --prod",
     "heroku-postbuild": "ng build --prod"
-    
   },
   "keywords": [],
   "author": "",
