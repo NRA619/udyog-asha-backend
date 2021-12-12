@@ -10,7 +10,7 @@ require("dotenv").config();
 
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 
 // for connecting backend to frontend, Origin is vercel hosting app
@@ -30,7 +30,7 @@ app.use("/Cart",require("./routes/Cart_router"));
 // app.use('/products', productRoutes);
 
 //connect to mongodb
-const uri = process.env.ATLAS_URI;
+const uri = process.env.MONGODB_URI;
 mongoose.connect(uri, {
   useNewUrlParser: true,
   useCreateIndex: true,
