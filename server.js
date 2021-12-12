@@ -6,24 +6,28 @@ const bodyParser = require('body-parser');
 
 
 // for .env file
-console.log("hello world")
+
 require("dotenv").config();
 
-console.log("hello worl")
+
 const app = express();
-console.log("hello wor")
+
 const port = process.env.PORT || 5000;
-console.log("hello wo")
+
 
 // for connecting backend to frontend, Origin is vercel hosting app
-console.log("hello w")
+
 app.use(cors({
   origin: "https://udyog-aasha.vercel.app",
   credentials: true,
 }));
-console.log("hello")
+
 app.use(express.json());
-console.log("hell")
+router.get("/", function(req, res) {
+  console.log("hello ji");
+
+});
+
 //Routes
 app.use("/user", require("./routes/userRouter")); // initial route. !!!important
 app.use("/tr", require("./routes/train_route"));
