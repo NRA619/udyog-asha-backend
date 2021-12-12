@@ -23,9 +23,9 @@ app.use(cors({
 }));
 
 app.use(express.json());
-router.get("/", function(req, res) {
-  console.log("hello ji");
-
+router.post("/", function(req, res) {
+  console.log("helloworld")
+  res.send("hello world")
 });
 
 //Routes
