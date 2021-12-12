@@ -23,8 +23,8 @@ app.use(cors({
 }));
 
 app.use(express.json());
-router.post("/", function(req, res) {
-  console.log("helloworld")
+router.get("/", function(req, res) {
+  
   res.send("hello world")
 });
 
