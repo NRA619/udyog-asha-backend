@@ -18,7 +18,7 @@ const port = process.env.PORT || 5000;
 // for connecting backend to frontend, Origin is vercel hosting app
 
 app.use(cors({
-  origin: "https://udyog-aasha.vercel.app",
+  origin: "http://localhost:3000",
   credentials: true,
 }));
 
