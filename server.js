@@ -37,6 +37,7 @@ app.use("/tr", require("./routes/train_route"));
 app.use("/product", require("./routes/product"));
 app.use("/payment", require("./routes/paymentRoute"));
 app.use("/Cart",require("./routes/Cart_router"));
+app.use("/service",require("./routes/serviceRoute"));
 // const productRoutes = require('./routes/products');
 // app.use('/products', productRoutes);
 
