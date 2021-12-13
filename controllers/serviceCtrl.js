@@ -72,6 +72,7 @@ const serviceCtrl = {
               });
             
           }
+          return res.json({ applied: "applied" });
         }
         if (service == "registration") {
           const query = await services.findOne({ email: email, "registration.subservice": subservice });
@@ -124,6 +125,7 @@ const serviceCtrl = {
                 //   nodemailer.getTestMessageUrl(info)
                 // );
               });
+              return res.json({ applied: "applied" });
             
           }
         }
@@ -178,6 +180,7 @@ const serviceCtrl = {
                 //   nodemailer.getTestMessageUrl(info)
                 // );
               });
+              return res.json({ applied: "applied" });
             
           }
         }
@@ -235,6 +238,7 @@ const serviceCtrl = {
                 //   nodemailer.getTestMessageUrl(info)
                 // );
               });
+              return res.json({ applied: "applied" });
             
           }
         }
@@ -284,6 +288,7 @@ const serviceCtrl = {
                 //   nodemailer.getTestMessageUrl(info)
                 // );
               });
+              return res.json({ applied: "applied" });
         }
         if (service == "registration") {
           const newservice = new service({
@@ -330,6 +335,7 @@ const serviceCtrl = {
                 //   nodemailer.getTestMessageUrl(info)
                 // );
               });
+              return res.json({ applied: "applied" });
         }
         if (service == "print_media") {
           const newservice = new service({
@@ -376,6 +382,7 @@ const serviceCtrl = {
                 //   nodemailer.getTestMessageUrl(info)
                 // );
               });
+              return res.json({ applied: "applied" });
         }
         if (service == "social_media_marketing") {
           const newservice = new service({
@@ -422,6 +429,7 @@ const serviceCtrl = {
                 //   nodemailer.getTestMessageUrl(info)
                 // );
               });
+              return res.json({ applied: "applied" });
         }
       }
     } catch (err) {
