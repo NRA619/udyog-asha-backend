@@ -70,7 +70,7 @@ const serviceCtrl = {
                 //   nodemailer.getTestMessageUrl(info)
                 // );
               });
-            console.log(update);
+            
           }
         }
         if (service == "registration") {
@@ -124,7 +124,7 @@ const serviceCtrl = {
                 //   nodemailer.getTestMessageUrl(info)
                 // );
               });
-            console.log(update);
+            
           }
         }
         if (service == "print_media") {
@@ -178,7 +178,7 @@ const serviceCtrl = {
                 //   nodemailer.getTestMessageUrl(info)
                 // );
               });
-            console.log(update);
+            
           }
         }
         if (service == "social_media_marketing") {
@@ -235,7 +235,7 @@ const serviceCtrl = {
                 //   nodemailer.getTestMessageUrl(info)
                 // );
               });
-            console.log(update);
+            
           }
         }
       } else {
