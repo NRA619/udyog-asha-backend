@@ -25,10 +25,12 @@ app.use(cors({
 app.use(express.json());
 
 app.get("/", function(req, res) {
-  
-  res.send({ some: "helloworld" })
+  res.send({ Udyog_Asha: "Welcome to udyog-asha-backend" });
 });
 
+app.get("/user", function(req, res) {
+  res.send({ Udyog_Asha: "Welcome to user" });
+})
 //Routes
 app.use("/user", require("./routes/userRouter")); // initial route. !!!important
 app.use("/tr", require("./routes/train_route"));
