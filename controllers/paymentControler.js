@@ -6,7 +6,15 @@ const request = require("request");
 const orderSchema = require("../models/orderSchema");
 const Razorpay = require("razorpay");
 const nodemailer = require("nodemailer");
+const { google } = require("googleapis");
 let orderId;
+
+const CLIENT_ID =
+  "689218340556-jmv6ul2587ul7diukgvqrq2klalinfnl.apps.googleusercontent.com";
+const CLIENT_SECRET = "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";
+const REDIRECT_URI = "https://developers.google.com/oauthplayground";
+const REFRESH_TOKEN =
+  "1//04Ovc83aFC78RCgYIARAAGAQSNwF-L9Ir0J1pXrGsgoHco8MF3Univ3IR0fniwo531hyzSWWzIPSw4rg3OJEOwmc028eoEB_1zGs";
 
 var instance = new Razorpay({
   key_id: process.env.KEY_ID,
@@ -73,25 +81,32 @@ const paymentControler = {
   },
 
   getPayment: async (req, res) => {
+    const oAuth2Client = new google.auth.OAuth2(
+      CLIENT_ID,
+      CLIENT_SECRET,
+      REDIRECT_URI
+    );
+    oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+    const accessToken = await oAuth2Client.getAccessToken();
     request(
       `https://${process.env.KEY_ID}:${process.env.SECREAT_KEY}@api.razorpay.com/v1/payments/${req.params.paymentId}`,
       function (error, response, body) {
         if (body) {
           const result = JSON.parse(body);
-          const {product_array} = req.body;
+          const { product_array } = req.body;
           // res.status(200).json(result);
           const newOrder = new orderSchema({
             result,
-            product_array
+            product_array,
           });
-          
+
           newOrder.save();
+
           if (
             result.error_code == null &&
             result.captured == true &&
             result.captured == true
           ) {
-            
             const output = `
             
             <div style = "
@@ -195,13 +210,14 @@ const paymentControler = {
         </div>
             `;
             let transporter = nodemailer.createTransport({
-              service: "Gmail", // true for 465, false for other ports
+              service: "gmail",
               auth: {
-                user: "udyogaasha157@gmail.com", // generated ethereal user
-                pass: "udyog157aasha", // generated ethereal password
-              },
-              tls: {
-                rejectUnauthorized: false,
+                type: "OAuth2",
+                user: "udyogaasha157@gmail.com",
+                clientId: CLIENT_ID,
+                clientSecret: CLIENT_SECRET,
+                refreshToken: REFRESH_TOKEN,
+                accessToken: accessToken,
               },
             });
 
@@ -218,11 +234,11 @@ const paymentControler = {
               if (error) {
                 return console.log(error);
               }
-              // console.log("Message sent: %s", info.messageId);
-              // console.log(
-              //   "Preview URL: %s",
-              //   nodemailer.getTestMessageUrl(info)
-              // );
+              console.log("Message sent: %s", info.messageId);
+              console.log(
+                "Preview URL: %s",
+                nodemailer.getTestMessageUrl(info)
+              );
             });
 
             return res.status(200).json({ paymentSuccess: true });
@@ -234,30 +250,36 @@ const paymentControler = {
     );
   },
   checkPaid_product: async (req, res) => {
-    try{
-      const {email, pid} = req.body
-      const check = await orderSchema.findOne({ "result.email": email, "product_array.productid": pid })
-      if(!check) {
+    try {
+      const { email, pid } = req.body;
+      const check = await orderSchema.findOne({
+        "result.email": email,
+        "product_array.productid": pid,
+      });
+      if (!check) {
         return res.json({ paid: false });
-      }else {
+      } else {
         return res.json({ paid: true });
       }
-    }catch(err){
-      res.json(err)
+    } catch (err) {
+      res.json(err);
     }
   },
   checkPaid_training: async (req, res) => {
-    try{
-      const {email, pid} = req.body
-      const check = await orderSchema.findOne({ "result.email": email, "product_array._id": pid })
-      if(!check) {
+    try {
+      const { email, pid } = req.body;
+      const check = await orderSchema.findOne({
+        "result.email": email,
+        "product_array._id": pid,
+      });
+      if (!check) {
         return res.json({ paid: false });
-      }else {
+      } else {
         return res.json({ paid: true });
       }
-    }catch(err){
-      res.json(err)
+    } catch (err) {
+      res.json(err);
     }
-  }
+  },
 };
 module.exports = paymentControler;

@@ -1,10 +1,13 @@
 const Users = require("../models/userModel");
-const jwt = require("jsonwebtoken");
-const sessionStorage = require("sessionstorage");
-
-const crypto = require("crypto");
 const nodemailer = require("nodemailer");
-const { updateOne } = require("../models/userModel");
+const { google } = require("googleapis");
+
+const CLIENT_ID =
+  "689218340556-jmv6ul2587ul7diukgvqrq2klalinfnl.apps.googleusercontent.com";
+const CLIENT_SECRET = "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";
+const REDIRECT_URI = "https://developers.google.com/oauthplayground";
+const REFRESH_TOKEN =
+  "1//04Ovc83aFC78RCgYIARAAGAQSNwF-L9Ir0J1pXrGsgoHco8MF3Univ3IR0fniwo531hyzSWWzIPSw4rg3OJEOwmc028eoEB_1zGs";
 
 const userCtrl = {
   // google login logic
@@ -143,6 +146,13 @@ const userCtrl = {
   },
   forgetpassword: async (req, res) => {
     try {
+      const oAuth2Client = new google.auth.OAuth2(
+        CLIENT_ID,
+        CLIENT_SECRET,
+        REDIRECT_URI
+      );
+      oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+      const accessToken = await oAuth2Client.getAccessToken();
       const { email } = req.body;
       if (email) {
         const user = await Users.findOne({ email });
@@ -160,21 +170,22 @@ const userCtrl = {
              <div>${otp}</div>
           `
           let transporter = nodemailer.createTransport({
-            service: "Gmail", // true for 465, false for other ports
+            service: "gmail",
             auth: {
-              user: "udyogaasha157@gmail.com", // generated ethereal user
-              pass: "udyog157aasha", // generated ethereal password
-            },
-            tls: {
-              rejectUnauthorized: false,
+              type: "OAuth2",
+              user: "udyogaasha157@gmail.com",
+              clientId: CLIENT_ID,
+              clientSecret: CLIENT_SECRET,
+              refreshToken: REFRESH_TOKEN,
+              accessToken: accessToken,
             },
           });
 
           // setup email data with unicode symbols
           let mailOptions = {
             from: '"Udyog-Asha" <udyogaasha157@gmail.com>', // sender address
-            to: email, // list of receivers
-            subject: "Udyog-Asha_OTP_Generator", // Subject line
+            to: result.email, // list of receivers
+            subject: "Payment Recipt", // Subject line
             html: output, // html body
           };
 
@@ -183,11 +194,11 @@ const userCtrl = {
             if (error) {
               return console.log(error);
             }
-            // console.log("Message sent: %s", info.messageId);
-            // console.log(
-            //   "Preview URL: %s",
-            //   nodemailer.getTestMessageUrl(info)
-            // );
+            console.log("Message sent: %s", info.messageId);
+            console.log(
+              "Preview URL: %s",
+              nodemailer.getTestMessageUrl(info)
+            );
           });
           return res.json({ otp: otp })
         }
