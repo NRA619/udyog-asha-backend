@@ -137,7 +137,7 @@ const paymentControler = {
                                display: block;
                                text-align: center;
                                ">
-                       <h3 style="color: white; margin-bottom: 5px; padding-top: 10px;">Rs.${result.amount}</h3>
+                       <h3 style="color: white; margin-bottom: 5px; padding-top: 10px;">Rs.${(result.amount)/100}</h3>
                        <h5 style="color: white; margin: 0;">Paid Successfully</h5>
                    </div>
                    <div style="
