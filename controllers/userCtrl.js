@@ -226,6 +226,7 @@ const userCtrl = {
   sendmail: async (req, res) => {
     try{
       const {name, email, query} = req.body
+      const sendmail_ = "namanrohilla122@gmail.com"
       const oAuth2Client = new google.auth.OAuth2(
         CLIENT_ID,
         CLIENT_SECRET,
@@ -254,8 +255,8 @@ const userCtrl = {
           // setup email data with unicode symbols
           let mailOptions = {
             from: '"Udyog-Asha" <udyogaasha157@gmail.com>', // sender address
-            to: "<namanrohilla122@gmail.com>", // list of receivers
-            subject: "QUery", // Subject line
+            to: sendmail_, // list of receivers
+            subject: "Query", // Subject line
             html: output, // html body
           };
 
