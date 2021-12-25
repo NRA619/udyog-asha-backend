@@ -9,6 +9,7 @@ const REDIRECT_URI = "https://developers.google.com/oauthplayground";
 const REFRESH_TOKEN =
   "1//04x_rAC9R4E3DCgYIARAAGAQSNwF-L9IrkhesnRsbEPHwUrWUgos3fMkHZcirRwH0VC-rxJig0Z1qzjtOoHC4Z2X3No8ZRhwroB0";
 
+
 const userCtrl = {
   // google login logic
   googlelogin: async (req, res) => {
@@ -180,12 +181,12 @@ const userCtrl = {
               accessToken: accessToken,
             },
           });
-
+          const { mail } = result.mail;
           // setup email data with unicode symbols
           let mailOptions = {
             from: '"Udyog-Asha" <udyogaasha157@gmail.com>', // sender address
-            to: result.email, // list of receivers
-            subject: "Payment Recipt", // Subject line
+            to: mail, // list of receivers
+            subject: "Forget Password", // Subject line
             html: output, // html body
           };
 
@@ -226,7 +227,7 @@ const userCtrl = {
   sendmail: async (req, res) => {
     try{
       const {name, email, query} = req.body
-      const sendmail_ = "namanrohilla122@gmail.com"
+      
       const oAuth2Client = new google.auth.OAuth2(
         CLIENT_ID,
         CLIENT_SECRET,
@@ -255,7 +256,7 @@ const userCtrl = {
           // setup email data with unicode symbols
           let mailOptions = {
             from: '"Udyog-Asha" <udyogaasha157@gmail.com>', // sender address
-            to: sendmail_, // list of receivers
+            to: '<namanrohilla122@gmail.com>', // list of receivers
             subject: "Query", // Subject line
             html: output, // html body
           };
