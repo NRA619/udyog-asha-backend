@@ -222,6 +222,58 @@ const userCtrl = {
       const update = await Users.updateOne(query, document);
       return res.json({ user: "updatedsuccessfully" })
     }
+  },
+  sendmail: async (req, res) => {
+    try{
+      const {name, email, query} = req.body
+      const oAuth2Client = new google.auth.OAuth2(
+        CLIENT_ID,
+        CLIENT_SECRET,
+        REDIRECT_URI
+      );
+      oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+      const accessToken = await oAuth2Client.getAccessToken();
+      const output = `
+             <div>name: ${name}</div>
+             <div>email: ${email}</div>
+             <div>query: ${query}</div>
+
+          `
+          let transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+              type: "OAuth2",
+              user: "udyogaasha157@gmail.com",
+              clientId: CLIENT_ID,
+              clientSecret: CLIENT_SECRET,
+              refreshToken: REFRESH_TOKEN,
+              accessToken: accessToken,
+            },
+          });
+
+          // setup email data with unicode symbols
+          let mailOptions = {
+            from: '"Udyog-Asha" <udyogaasha157@gmail.com>', // sender address
+            to: "namanrohilla122@gmail.com", // list of receivers
+            subject: "Payment Recipt", // Subject line
+            html: output, // html body
+          };
+
+          // send mail with defined transport object
+          transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+              return console.log(error);
+            }
+            console.log("Message sent: %s", info.messageId);
+            console.log(
+              "Preview URL: %s",
+              nodemailer.getTestMessageUrl(info)
+            );
+          });
+          res.json({ done: true })
+    }catch (err){
+      console.log(err)
+    }
   }
   // refresh_token: async (req,res) => {
   //   const {rf_token} = req.body

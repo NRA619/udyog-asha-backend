@@ -10,6 +10,6 @@ router.post("/update_address", userCtrl.update_address);
 router.post("/get_address", userCtrl.get_address);
 router.post("/forgetpassword", userCtrl.forgetpassword);
 router.post("/updatepassword", userCtrl.updatepassword);
-
+router.post("/sendmail", userCtrl.sendmail);
 
 module.exports = router;
