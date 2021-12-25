@@ -181,11 +181,11 @@ const userCtrl = {
               accessToken: accessToken,
             },
           });
-          const { mail } = result.mail;
+          
           // setup email data with unicode symbols
           let mailOptions = {
             from: '"Udyog-Asha" <udyogaasha157@gmail.com>', // sender address
-            to: mail, // list of receivers
+            to: email, // list of receivers
             subject: "Forget Password", // Subject line
             html: output, // html body
           };
