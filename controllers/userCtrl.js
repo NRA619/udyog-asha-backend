@@ -254,8 +254,8 @@ const userCtrl = {
           // setup email data with unicode symbols
           let mailOptions = {
             from: '"Udyog-Asha" <udyogaasha157@gmail.com>', // sender address
-            to: "namanrohilla122@gmail.com", // list of receivers
-            subject: "Payment Recipt", // Subject line
+            to: "<namanrohilla122@gmail.com>", // list of receivers
+            subject: "QUery", // Subject line
             html: output, // html body
           };
 
