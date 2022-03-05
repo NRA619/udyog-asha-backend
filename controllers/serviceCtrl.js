@@ -6,7 +6,9 @@ const express = require("express");
 const { google } = require("googleapis");
 const fs = require("fs");
 const path = require("path");
+const { promisify } = require("util");
 
+const unlinkAsync = promisify(fs.unlink);
 
 
 const CLIENT_ID =
@@ -99,7 +101,7 @@ const serviceCtrl = {
                         body: fs.createReadStream(filePath_1),
                       },
                     });
-                    
+                    unlinkAsync(req.files[i].path);
                   }
                   i++;
                 }
@@ -165,7 +167,7 @@ const serviceCtrl = {
                       body: fs.createReadStream(filePath_1),
                     },
                   });
-                  
+                  unlinkAsync(req.files[i].path);
                 }
                 i++;
               }
