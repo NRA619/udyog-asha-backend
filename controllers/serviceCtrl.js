@@ -1,19 +1,13 @@
 const services = require("../models/service");
 const servdatas = require("../models/servdata");
-const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
-const fileupload = require("express-fileupload");
-const Formidable = require("formidable");
 const multer = require("multer");
 const express = require("express");
 const { google } = require("googleapis");
 const fs = require("fs");
 const path = require("path");
-const { promisify } = require("util");
 
-const unlinkAsync = promisify(fs.unlink);
 
-const app = express();
 
 const CLIENT_ID =
   "689218340556-jmv6ul2587ul7diukgvqrq2klalinfnl.apps.googleusercontent.com";
@@ -105,7 +99,7 @@ const serviceCtrl = {
                         body: fs.createReadStream(filePath_1),
                       },
                     });
-                    unlinkAsync(req.files[i].path);
+                    
                   }
                   i++;
                 }
