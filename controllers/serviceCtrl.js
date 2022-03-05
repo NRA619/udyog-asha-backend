@@ -64,7 +64,7 @@ const serviceCtrl = {
           //   var index = Math.floor(Math.random() * digits.length);
           //   otp = otp + digits[index];
           // }
-          if (user) {
+          if (Object.keys(user).length != 0) {
             console.log("2");
             if (service == "registration") {
               const query = await services.findOne({
