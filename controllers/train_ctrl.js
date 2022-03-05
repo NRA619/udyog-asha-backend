@@ -76,6 +76,14 @@ const trainctrl = {
     }catch (err) {
       res.json(err)
     }
+  },
+  posttrain: async (req, res) => {
+    try{
+      const {data} = req.body;
+      console.log(data);
+    }catch(err){
+      console.log(err)
+    }
   }
 };
 

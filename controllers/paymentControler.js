@@ -137,7 +137,9 @@ const paymentControler = {
                                display: block;
                                text-align: center;
                                ">
-                       <h3 style="color: white; margin-bottom: 5px; padding-top: 10px;">Rs.${(result.amount)/100}</h3>
+                       <h3 style="color: white; margin-bottom: 5px; padding-top: 10px;">Rs.${
+                         result.amount / 100
+                       }</h3>
                        <h5 style="color: white; margin: 0;">Paid Successfully</h5>
                    </div>
                    <div style="
@@ -152,7 +154,9 @@ const paymentControler = {
                                width: 60%;
                                ">
                        <h4 style="margin-bottom: 0; text-align: start; margin-left: 10%; color: white;">Payment Id</h4>
-                       <h4 style="margin: 0; text-align: start; margin-left: 10%; color: #1E90FF;">${result.id}</h4>
+                       <h4 style="margin: 0; text-align: start; margin-left: 10%; color: #1E90FF;">${
+                         result.id
+                       }</h4>
                     </div>
                    <div style="
                                display: block;
@@ -160,7 +164,9 @@ const paymentControler = {
                                width: 60%;                              
                                ">
                        <h4 style="margin-bottom: 0; text-align: start; margin-left: 10%; color: white;">Paid On</h4>
-                       <h4 style="margin: 0; text-align: start; margin-left: 10%; color: #1E90FF;">${result.created_at}</h4>
+                       <h4 style="margin: 0; text-align: start; margin-left: 10%; color: #1E90FF;">${
+                         result.created_at
+                       }</h4>
                     </div>
                    <div style="
                                display: block;                               
@@ -168,7 +174,9 @@ const paymentControler = {
                                width: 60%;
                                ">
                        <h4 style="margin-bottom: 0; text-align: start; margin-left: 10%; color: white;">Method</h4>
-                       <h4 style="margin: 0; text-align: start; margin-left: 10%; color: #1E90FF;">${result.method}</h4>
+                       <h4 style="margin: 0; text-align: start; margin-left: 10%; color: #1E90FF;">${
+                         result.method
+                       }</h4>
                     </div>
                    <div style="
                                display: block;                               
@@ -176,7 +184,9 @@ const paymentControler = {
                                width: 60%;
                                ">
                        <h4 style="margin-bottom: 0; text-align: start; margin-left: 10%; color: white;">Mobile no.</h4>
-                       <h4 style="margin: 0; text-align: start; margin-left: 10%; color: #1E90FF;">${result.contact}</h4>
+                       <h4 style="margin: 0; text-align: start; margin-left: 10%; color: #1E90FF;">${
+                         result.contact
+                       }</h4>
                     </div>
                   <div style="
                                display: block; 
@@ -184,7 +194,9 @@ const paymentControler = {
                                width: 60%;
                                ">
                        <h4 style="margin-bottom: 0; text-align: start; margin-left: 10%; color: white;">Email</h4>
-                       <h4 style="margin: 0; text-align: start; margin-left: 10%; color: #1E90FF;">${result.email}</h4>
+                       <h4 style="margin: 0; text-align: start; margin-left: 10%; color: #1E90FF;">${
+                         result.email
+                       }</h4>
                     </div>
                     <div style="
                                display: block; 
@@ -192,7 +204,9 @@ const paymentControler = {
                                width: 60%;
                                ">
                        <h4 style="margin-bottom: 0; text-align: start; margin-left: 10%; color: white;">Order Description</h4>
-                       <h4 style="margin: 0; text-align: start; margin-left: 10%; color: #1E90FF;">${result.description}</h4>
+                       <h4 style="margin: 0; text-align: start; margin-left: 10%; color: #1E90FF;">${
+                         result.description
+                       }</h4>
                     </div>
                     <div style="
                                 width: 40%;
@@ -277,6 +291,33 @@ const paymentControler = {
       } else {
         return res.json({ paid: true });
       }
+    } catch (err) {
+      res.json(err);
+    }
+  },
+  checkPaid_services: async (req, res) => {
+    try {
+      const { email, service_name } = req.body;
+      const check = await orderSchema.findOne({
+        "result.email": email,
+        "product_array.name": service_name,
+      });
+      if (!check) {
+        return res.json({ paid: false });
+      } else {
+        return res.json({ paid: true });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  Enrolled_Courses: async (req, res) => {
+    try {
+      const { email } = req.body;
+      const check = await orderSchema.find({
+        "result.email": email,
+      });
+      res.json(check);
     } catch (err) {
       res.json(err);
     }
