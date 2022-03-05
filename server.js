@@ -31,6 +31,10 @@ app.get("/", function(req, res) {
 app.get("/user", function(req, res) {
   res.send({ Udyog_Asha: "Welcome to user" });
 })
+
+app.get("/service/apply", function(req, res) {
+  res.send({ Udyog_Asha: "Welcome to user" });
+})
 //Routes
 app.use("/user", require("./routes/userRouter")); // initial route. !!!important
 app.use("/tr", require("./routes/train_route"));
