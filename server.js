@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
-
+var fileupload = require("express-fileupload");
 
 
 // for .env file
@@ -43,6 +43,7 @@ app.use("/admin", require("./routes/admin"));
 // app.use('/products', productRoutes);
 
 //connect to mongodb
+app.use(fileupload());
 const uri = process.env.MONGODB_URI;
 mongoose.connect(uri, {
   useNewUrlParser: true,
