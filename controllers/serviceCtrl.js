@@ -36,7 +36,7 @@ const serviceCtrl = {
   apply: async (req, res) => {
     try {
       const REFRESH_TOKEN =
-        "1//04-2dgaVLvsNOCgYIARAAGAQSNwF-L9Ir7fiJerGx4Wp8R2jV2yh7mm-jnb-r7IY0oqgV4kN09UwA-POU237hT2azecUEg_oyH14";
+        "1//04mPrV-M77DNwCgYIARAAGAQSNwF-L9IrwsiCIAWkfr6aDWUJfUhLNTC_Pn_j-aPgAUC6c01R9SERSC85rybKPFUKoXeNvlUR_pM";
       const oAuth2Client = new google.auth.OAuth2(
         CLIENT_ID,
         CLIENT_SECRET,
@@ -212,7 +212,7 @@ const serviceCtrl = {
   unverified: async (req, res) => {
     try {
       const REFRESH_TOKEN =
-        "1//04-2dgaVLvsNOCgYIARAAGAQSNwF-L9Ir7fiJerGx4Wp8R2jV2yh7mm-jnb-r7IY0oqgV4kN09UwA-POU237hT2azecUEg_oyH14";
+        "1//04mPrV-M77DNwCgYIARAAGAQSNwF-L9IrwsiCIAWkfr6aDWUJfUhLNTC_Pn_j-aPgAUC6c01R9SERSC85rybKPFUKoXeNvlUR_pM";
       const oAuth2Client = new google.auth.OAuth2(
         CLIENT_ID,
         CLIENT_SECRET,
