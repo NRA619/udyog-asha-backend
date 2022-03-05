@@ -165,7 +165,7 @@ const serviceCtrl = {
                       body: fs.createReadStream(filePath_1),
                     },
                   });
-                  unlinkAsync(req.files[i].path);
+                  
                 }
                 i++;
               }
