@@ -189,6 +189,8 @@ const serviceCtrl = {
               newservice.save();
 
               return res.json({ applied: "false" });
+            } else {
+              return res.json({ applied: "Data Not Found" })
             }
           }
         }
