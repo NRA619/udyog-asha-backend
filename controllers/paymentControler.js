@@ -322,5 +322,56 @@ const paymentControler = {
       res.json(err);
     }
   },
+  check_pending_products: async (req, res) => {
+    try{
+      const response = await orderSchema.find({ "status": "pending" })
+      return res.json(response);
+    }catch(err){
+      console.log(err)
+    }
+  },
+  pending_products: async (req, res) => {
+    try{
+      const {pay_id, email, timestamp} = req.body;
+      const res = await orderSchema.findOne({ "result.id": pay_id, "result.email": email, "result.created_at": timestamp });
+      if(res){
+        const docu = {
+          $set: {
+            status: "completed",
+          },
+        }
+        const update = await orderSchema.updateOne(res, docu);
+        console.log(update);
+        return res.json({ update: true })
+      }
+    }catch(err){
+      console.log(err)
+    }
+  },
+  check_in_progress: async (req, res) => {
+    try{
+      const response = await orderSchema.find({ "status": "in-progress" });
+      return res.json(response);
+    }catch(err){
+      console.log(err);
+    }
+  },
+  in_progress_services: async (req, res) => {
+    try{
+      const {pay_id, email, timestamp} = req.body;
+      const res = await orderSchema.findOne({ "result.id": pay_id, "result.email": email, "result.created_at": timestamp });
+      if(res){
+        const docu = {
+          $set: {
+            status: "completed",
+          },
+        }
+        const update = await orderSchema.updateOne(res, docu);
+        return res.json({ update: true })
+      }
+    }catch(err){
+      console.log(err);
+    }
+  }
 };
 module.exports = paymentControler;

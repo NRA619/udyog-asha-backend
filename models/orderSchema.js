@@ -8,6 +8,9 @@ const orderSchema = new mongoose.Schema({
   },
   product_array : {
     type: Array,
+  },
+  status : {
+    type: String,
   }
 
 });
