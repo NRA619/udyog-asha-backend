@@ -327,6 +327,7 @@ const serviceCtrl = {
           });
           const update = await services.updateOne(query, document1);
           console.log(update);
+          return res.json({ data: "done" })
         }
       }
     } catch (err) {
