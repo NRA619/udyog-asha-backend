@@ -9,13 +9,12 @@ const trainSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  Mode: {
+  category: {
     type: String,
-    required: true,
+    required:true,
   },
-  id: {
-    type: Number,
-    required: true,
+  featured: {
+    type: Boolean,
   },
   img: {
     type: String,

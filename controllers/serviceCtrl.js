@@ -15,10 +15,11 @@ const unlinkAsync = promisify(fs.unlink);
 
 const app = express();
 
-const CLIENT_ID =
-  "689218340556-jmv6ul2587ul7diukgvqrq2klalinfnl.apps.googleusercontent.com";
-const CLIENT_SECRET = "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";
-const REDIRECT_URI = "https://developers.google.com/oauthplayground";
+const CLIENT_ID = process.env.playground_client_id;
+const CLIENT_SECRET = process.env.playground_client_secret;
+const REDIRECT_URI = process.env.playground_REDIRECT_URI;
+
+
 
 app.use(express.static("public"));
 const storage = multer.diskStorage({
@@ -35,8 +36,7 @@ const upload = multer({ storage }).array("file", 18);
 const serviceCtrl = {
   apply: async (req, res) => {
     try {
-      const REFRESH_TOKEN =
-        "1//04xPp0C0lt0oDCgYIARAAGAQSNwF-L9Ire5ALq3R3XLz93KRwPBWQG3AetV247YqomgwFH3V2o7MEHD16fuHVUpDR4a76_I64SH0";
+      const REFRESH_TOKEN = process.env.playground_refresh_token;
       const oAuth2Client = new google.auth.OAuth2(
         CLIENT_ID,
         CLIENT_SECRET,
@@ -213,8 +213,7 @@ const serviceCtrl = {
   },
   unverified: async (req, res) => {
     try {
-      const REFRESH_TOKEN =
-        "1//04xPp0C0lt0oDCgYIARAAGAQSNwF-L9Ire5ALq3R3XLz93KRwPBWQG3AetV247YqomgwFH3V2o7MEHD16fuHVUpDR4a76_I64SH0";
+      const REFRESH_TOKEN = process.env.playground_refresh_token;
       const oAuth2Client = new google.auth.OAuth2(
         CLIENT_ID,
         CLIENT_SECRET,
