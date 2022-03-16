@@ -91,11 +91,12 @@ const paymentControler = {
       function (error, response, body) {
         if (body) {
           const result = JSON.parse(body);
-          const { product_array } = req.body;
+          const { product_array, status } = req.body;
           // res.status(200).json(result);
           const newOrder = new orderSchema({
             result,
             product_array,
+            status
           });
 
           newOrder.save();
