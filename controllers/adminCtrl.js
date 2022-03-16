@@ -1,5 +1,6 @@
 const admin = require("../models/admin");
 const aliens = require("../models/train");
+const product = require("../models/product");
 
 const adminCtrl = {
     // google login logic
@@ -40,13 +41,10 @@ const adminCtrl = {
     update_train: async (req, res) => {
         try{
             const {values} = req.body;
-            console.log(values);
             const category = values.category_of_update;
-            console.log(category);
             const find = await aliens.findOne({pname: values.pname});
             var updateVal = {};
             updateVal[category] = values.update;
-            console.log(updateVal)
             if(find){
                 const document = {
                     $set: updateVal,
@@ -76,7 +74,59 @@ const adminCtrl = {
         }catch(err){
             console.log(err);
         }
-    }
+    },
+    save_product: async (req, res) => {
+        try{
+            const {products} = req.body;
+            const new_products = new product({
+                pname: products.pname,
+                price: products.price,
+                img: products.img,
+                discription: products.description,
+            })
+            new_products.save();
+            return res.json({ data: "added" })
+        }catch(err){
+            console.log(err);
+        }
+    },
+    update_product: async (req, res) => {
+        try{
+            const {values} = req.body;
+            const category = values.category_of_update;
+            const find = await product.findOne({pname: values.pname});
+            var updateVal = {};
+            updateVal[category] = values.update;
+            if(find){
+                const document = {
+                    $set: updateVal,
+                  };
+                  const update2 = await product.updateOne(find, document);
+                  if(update2.n > 0){
+                      return res.json({ data: "updated" })
+                  }else {
+                      return res.json({ data: "failed" })
+                  }
+            }else {
+                return res.json({ data: "failed" })
+            }
+        }catch(err){
+            console.log(err)
+        }
+    },
+    delete_product: async (req, res) => {
+        try{
+            const {values} = req.body;
+            const response = await product.deleteOne({ pname: values.pname });
+            if(response.n > 0){
+                return res.json({ data: "updated" })
+            }else {
+                return res.json({ data: "failed" });
+            }
+        }catch(err){
+            console.log(err);
+        }
+    },
     
 }
 
