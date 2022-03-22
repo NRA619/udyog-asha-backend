@@ -11,6 +11,6 @@ router.post("/get_address", userCtrl.get_address);
 router.post("/forgetpassword", userCtrl.forgetpassword);
 router.post("/updatepassword", userCtrl.updatepassword);
 router.post("/sendmail", userCtrl.sendmail);
-router.post("/get_paid_id", paymentControler.checkPaid_training_2);
+
 
 module.exports = router;

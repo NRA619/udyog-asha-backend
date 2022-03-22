@@ -15,5 +15,6 @@ router.post("/reviewcheck", paymentControler.checkPaid_training);
 router.post("/reviewvalidate", reviewCtrl.checkReview);
 router.post("/checkproduct", trainctrl.check);
 router.post("/posttrain", trainctrl.posttrain);
+router.post("/get_paid_id", paymentControler.checkPaid_training_2);
 
 module.exports = router;
