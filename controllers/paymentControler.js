@@ -371,6 +371,22 @@ const paymentControler = {
     }catch(err){
       console.log(err);
     }
-  }
+  },
+  checkPaid_training_2: async (req, res) => {
+    try {
+      const { email, pid } = req.body;
+      const check = await orderSchema.findOne({
+        "result.email": email,
+        "product_array._id": pid, 
+      });
+      if(!check){
+        return res.json({ data: "Not found" })
+      }else {
+        return res.json({ data: check._id });
+      }
+    } catch (err) {
+      res.json(err);
+    }
+  },
 };
 module.exports = paymentControler;
