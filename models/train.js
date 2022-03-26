@@ -26,7 +26,7 @@ const trainSchema = new mongoose.Schema({
     type: String,
   },
   invigilator:{
-    typr: String,
+    type: String,
   },
 });
 
