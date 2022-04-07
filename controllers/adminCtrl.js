@@ -29,7 +29,8 @@ const adminCtrl = {
                 discription: course.description,
                 invigilator: course.invigilator,
                 featured: course.featured,
-                details: details
+                details: details,
+                materials: materials,
             })
             new_train.save();
             return res.json({ data: "added" })
@@ -127,6 +128,32 @@ const adminCtrl = {
             console.log(err);
         }
     },
+    add_materials: async (req, res) => {
+        try {
+          const { cname, materials } = req.body;
+          console.log(materials);
+          const response = await aliens.findOne({ pname: cname });
+          if (response) {
+            const query2 = { pname: cname };
+            const document1 = {
+              $push: {
+                materials
+              },
+            };
+            console.log(document1);
+            const update2 = await aliens.updateOne(query2, document1);
+            if (update2.n > 0) {
+                return res.json({ data: "updated" });
+              } else {
+                return res.json({ data: "failed" });
+              }
+            } else {
+              return res.json({ data: "failed" });
+            }
+        } catch (err) {
+          console.log(err);
+        }
+      },
     
 }
 

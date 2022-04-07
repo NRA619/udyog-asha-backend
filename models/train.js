@@ -28,6 +28,9 @@ const trainSchema = new mongoose.Schema({
   invigilator:{
     type: String,
   },
+  materials:{
+    type: Array,
+  },
 });
 
 module.exports = mongoose.model("aliens", trainSchema);

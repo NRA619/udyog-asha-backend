@@ -8,6 +8,6 @@ router.post("/delete_train", adminCtrl.delete_train);
 router.post("/save_product", adminCtrl.save_product);
 router.post("/update_product", adminCtrl.update_product);
 router.post("/delete_product", adminCtrl.delete_product);
-
+router.post("/add_materials", adminCtrl.add_materials);
 
 module.exports = router;
