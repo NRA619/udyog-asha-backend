@@ -20,7 +20,7 @@ const adminCtrl = {
     savetrain: async (req, res) => {
         try{
             
-            const {course, details} = req.body;
+            const {course, details, materials} = req.body;
             const new_train = new aliens({
                 pname: course.pname,
                 price: course.price,
