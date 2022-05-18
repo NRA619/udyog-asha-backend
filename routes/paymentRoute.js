@@ -3,7 +3,7 @@ const paymentControler = require("../controllers/paymentControler");
 const router = express.Router();
 
 router.post("/createorder", paymentControler.createOrder);
-router.post("/payment/callback", paymentControler.paymentCallback);
+router.get("/payment/callback/", paymentControler.paymentCallback);
 router.post("/payments/:paymentId", paymentControler.getPayment);
 router.post("/Courses", paymentControler.Enrolled_Courses);
 router.post("/check_pending", paymentControler.check_pending_products);
