@@ -12,10 +12,10 @@ const tempSchema = new mongoose.Schema({
   status : {
     type: String,
   },
-  expireAt: {
+  expire_at: {
     type: Date,
     default: Date.now,
-    index: { expires: '10m' },
+    expires: 600,
   },
 
 });
