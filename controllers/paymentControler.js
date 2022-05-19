@@ -94,8 +94,8 @@ const paymentControler = {
     if (responseData.payment_id) {
       let userId = responseData.user_id;
       Insta.setKeys(
-        "98e67d376bc53c2908b15ab7421370f3",
-        "77a6fc13d65735d249fb38f50ac63ad4"
+        process.env.instamojo_key1,
+        process.env.instamojo_key2
       );
       const user = await Users.findOne({ email: userId });
       console.log(user);
@@ -130,7 +130,7 @@ const paymentControler = {
               status: "completed",
             });
             newOrder.save();
-            return res.redirect('https://www.udyogaasha.com/training/thankyou' );
+            return res.redirect('https://www.udyogaasha.com/training/thankyou');
           }
         }
       );
