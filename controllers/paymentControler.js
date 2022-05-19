@@ -65,8 +65,9 @@ const paymentControler = {
           console.log(newOrder);
           const redirectUrl = responseData.payment_request.longurl;
           console.log(responseData);
-          res.status(200).json({ url: redirectUrl });
+          return res.status(200).json({ url: redirectUrl });
         }
+        return 
       });
 
       // const { price } = req.body;
