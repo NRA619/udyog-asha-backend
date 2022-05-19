@@ -47,29 +47,33 @@ const paymentControler = {
       data.send_sms = true;
       data.allow_repeated_payments = false;
       console.log(data);
-      Insta.createPayment(data, function (error, response) {
-        if (error) {
-          // some error
-        } else {
-          // Payment redirection link at response.payment_request.longurl
-
-          console.log(response);
-          const responseData = JSON.parse(response);
-          const result = responseData.payment_request;
-          const newOrder = new tempSchema({
-            result: result,
-            product_array: data.custom_fields,
-            status: data.status_state,
-          });
-          newOrder.save();
-          console.log(newOrder);
-          const redirectUrl = responseData.payment_request.longurl;
-          console.log(responseData);
-          return res.status(200).json({ url: redirectUrl });
-        }
-        return 
-      });
-
+      if(data.amount > 9 && Object.keys(data.purpose).length > 0){
+        Insta.createPayment(data, function (error, response) {
+          if (error) {
+            // some error
+          } else {
+            // Payment redirection link at response.payment_request.longurl
+  
+            console.log(response);
+            const responseData = JSON.parse(response);
+            const result = responseData.payment_request;
+            const newOrder = new tempSchema({
+              result: result,
+              product_array: data.custom_fields,
+              status: data.status_state,
+            });
+            newOrder.save();
+            console.log(newOrder);
+            const redirectUrl = responseData.payment_request.longurl;
+            console.log(responseData);
+            return res.status(200).json({ url: redirectUrl });
+          }
+          
+        });
+      }else {
+        return res.json("payment Destroyed")
+      }
+      return 
       // const { price } = req.body;
       // var options = {
       //   amount: price, // amount in the smallest currency unit paise
