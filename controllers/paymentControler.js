@@ -130,7 +130,7 @@ const paymentControler = {
               product_array: user2313123.product_array,
               status: user2313123.status,
             });
-            newOrder.save();
+            newOrder.save(); //save
           }
         }
       );
