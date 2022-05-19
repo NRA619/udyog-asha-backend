@@ -130,11 +130,10 @@ const paymentControler = {
               status: "completed",
             });
             newOrder.save();
-            return res.redirect('https://www.udyogaasha.com/training/thankyou');
           }
         }
       );
-      return res.json({data : "failed"});
+      return res.redirect('https://www.udyogaasha.com/training/thankyou');
     }
     // const form = Formidable();
     // form.parse(req, (err, fields, files) => {
