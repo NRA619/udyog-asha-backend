@@ -28,8 +28,8 @@ const paymentControler = {
     try {
       console.log("ho");
       Insta.setKeys(
-        "98e67d376bc53c2908b15ab7421370f3",
-        "77a6fc13d65735d249fb38f50ac63ad4"
+        process.env.instamojo_key1,
+        process.env.instamojo_key2
       );
 
       const data = new Insta.PaymentData();
@@ -43,7 +43,7 @@ const paymentControler = {
       data.phone = req.body.phone;
       data.send_email = true;
       data.custom_fields = req.body.product;
-      // data.send_sms = false;
+      data.send_sms = true;
       data.allow_repeated_payments = false;
       console.log(data);
       Insta.createPayment(data, function (error, response) {
