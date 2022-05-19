@@ -43,6 +43,7 @@ const paymentControler = {
       data.phone = req.body.phone;
       data.send_email = true;
       data.custom_fields = req.body.product;
+      data.status_state = req.body.status_state;
       data.send_sms = true;
       data.allow_repeated_payments = false;
       console.log(data);
@@ -58,7 +59,7 @@ const paymentControler = {
           const newOrder = new tempSchema({
             result: result,
             product_array: data.custom_fields,
-            status: "completed",
+            status: data.status_state,
           });
           newOrder.save();
           console.log(newOrder);
@@ -127,7 +128,7 @@ const paymentControler = {
             const newOrder = new orderSchema({
               result: sup1,
               product_array: user2313123.product_array,
-              status: "completed",
+              status: user2313123.status,
             });
             newOrder.save();
           }
@@ -359,7 +360,7 @@ const paymentControler = {
     try {
       const { email, pid } = req.body;
       const check = await orderSchema.findOne({
-        "result.email": email,
+        "result.buyer_email": email,
         "product_array.productid": pid,
       });
       if (!check) {
@@ -391,7 +392,7 @@ const paymentControler = {
     try {
       const { email, service_name } = req.body;
       const check = await orderSchema.findOne({
-        "result.email": email,
+        "result.buyer_email": email,
         "product_array.name": service_name,
       });
       if (!check) {
@@ -426,8 +427,8 @@ const paymentControler = {
     try {
       const { pay_id, email, timestamp } = req.body;
       const res = await orderSchema.findOne({
-        "result.id": pay_id,
-        "result.email": email,
+        "result.payment_id": pay_id,
+        "result.buyer_email": email,
         "result.created_at": timestamp,
       });
       if (res) {
@@ -456,8 +457,8 @@ const paymentControler = {
     try {
       const { pay_id, email, timestamp } = req.body;
       const res = await orderSchema.findOne({
-        "result.id": pay_id,
-        "result.email": email,
+        "result.payment_id": pay_id,
+        "result.buyer_email": email,
         "result.created_at": timestamp,
       });
       if (res) {
