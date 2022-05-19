@@ -50,7 +50,8 @@ const adminCtrl = {
                 const document = {
                     $set: updateVal,
                   };
-                  const update2 = await aliens.updateOne(find, document);
+                  const find1 = {pname: values.pname};
+                  const update2 = await aliens.updateOne(find1, document);
                   if(update2.n > 0){
                       return res.json({ data: "updated" })
                   }else {
@@ -102,7 +103,8 @@ const adminCtrl = {
                 const document = {
                     $set: updateVal,
                   };
-                  const update2 = await product.updateOne(find, document);
+                  const find1 = {pname: values.pname};
+                  const update2 = await aliens.updateOne(find1, document);
                   if(update2.n > 0){
                       return res.json({ data: "updated" })
                   }else {
