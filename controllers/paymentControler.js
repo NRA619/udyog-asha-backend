@@ -11,6 +11,7 @@ const Insta = require("instamojo-nodejs");
 const url = require("url");
 const Users = require("../models/userModel");
 const tempSchema = require("../models/temp");
+const servOrderSchema = require("../models/servOrderSchema");
 let orderId;
 // const Insta = require('instamojo-nodejs');
 
@@ -136,6 +137,14 @@ const paymentControler = {
               status: user2313123.status,
             });
             newOrder.save(); //s
+            if(user2313123.status == "in-progress"){
+              const servOrder = new servOrderSchema({
+                result: sup1,
+                product_array: user2313123.product_array,
+                status: user2313123.status,
+              });
+              servOrder.save();
+            }
           }
         }
       );
@@ -396,7 +405,7 @@ const paymentControler = {
   checkPaid_services: async (req, res) => {
     try {
       const { email, service_name } = req.body;
-      const check = await orderSchema.findOne({
+      const check = await servOrderSchema.findOne({
         "result.buyer_email": email,
         "product_array.name": service_name,
       });
@@ -452,7 +461,7 @@ const paymentControler = {
   },
   check_in_progress: async (req, res) => {
     try {
-      const response = await orderSchema.find({ status: "in-progress" });
+      const response = await servOrderSchema.find({ status: "in-progress" });
       return res.json(response);
     } catch (err) {
       console.log(err);
@@ -461,7 +470,7 @@ const paymentControler = {
   in_progress_services: async (req, res) => {
     try {
       const { pay_id, email, timestamp } = req.body;
-      const res = await orderSchema.findOne({
+      const res = await servOrderSchema.findOne({
         "result.payment_id": pay_id,
         "result.buyer_email": email,
         "result.created_at": timestamp,
@@ -472,7 +481,7 @@ const paymentControler = {
             status: "completed",
           },
         };
-        const update = await orderSchema.updateOne(res, docu);
+        const update = await servOrderSchema.updateOne(res, docu);
         return res.json({ update: true });
       }
     } catch (err) {
