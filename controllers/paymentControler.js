@@ -113,23 +113,20 @@ const paymentControler = {
           if (error) {
             // Some error
           } else {
-            console.log(response);
-            response.payment_request.payment.shipping_address =
-              user.address_array[0].addressline1 +
-              " " +
-              user.address_array[0].addressline2;
-            response.payment_request.payment.shipping_city =
-              user.address_array[0].city;
-            response.payment_request.payment.shipping_state =
-              user.address_array[0].state;
-            response.payment_request.payment.shipping_pincode =
-              user.address_array[0].pincode;
-          
-            const user2313123 = await tempSchema.findOne({
-              "result[0].id": response.payment_request_id,
-            });
             console.log(user2313123);
             console.log(response);
+            if (user2313123.status == "pending") {
+              response.payment_request.payment.shipping_address =
+                user.address_array[0].addressline1 +
+                " " +
+                user.address_array[0].addressline2;
+              response.payment_request.payment.shipping_city =
+                user.address_array[0].city;
+              response.payment_request.payment.shipping_state =
+                user.address_array[0].state;
+              response.payment_request.payment.shipping_pincode =
+                user.address_array[0].pincode;
+            }
             const sup1 = response.payment_request.payment;
             const newOrder = new orderSchema({
               result: sup1,
