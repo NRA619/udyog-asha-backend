@@ -331,7 +331,7 @@ const paymentControler = {
               service: "gmail",
               auth: {
                 type: "OAuth2",
-                user: "udyogaasha157@gmail.com",
+                user: "udyogaasha@gmail.com",
                 clientId: CLIENT_ID,
                 clientSecret: CLIENT_SECRET,
                 refreshToken: REFRESH_TOKEN,
@@ -341,7 +341,7 @@ const paymentControler = {
 
             // setup email data with unicode symbols
             let mailOptions = {
-              from: '"Udyog-Asha" <udyogaasha157@gmail.com>', // sender address
+              from: '"Udyog-Asha" <udyogaasha@gmail.com>', // sender address
               to: result.email, // list of receivers
               subject: "Payment Recipt", // Subject line
               html: output, // html body

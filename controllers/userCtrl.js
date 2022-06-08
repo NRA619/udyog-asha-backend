@@ -242,7 +242,7 @@ const userCtrl = {
             service: "gmail",
             auth: {
               type: "OAuth2",
-              user: "udyogaasha157@gmail.com",
+              user: "udyogaasha@gmail.com",
               clientId: CLIENT_ID,
               clientSecret: CLIENT_SECRET,
               refreshToken: REFRESH_TOKEN,
@@ -252,8 +252,8 @@ const userCtrl = {
 
           // setup email data with unicode symbols
           let mailOptions = {
-            from: '"Udyog-Asha" <udyogaasha157@gmail.com>', // sender address
-            to: '<udyogaasha@gmail.com>', // list of receivers
+            from: '"Udyog-Asha" <udyogaasha@gmail.com>', // sender address
+            to: '<namanrohilla122@gmail.com>', // list of receivers
             subject: "Query", // Subject line
             html: output, // html body
           };
